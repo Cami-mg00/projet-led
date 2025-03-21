@@ -1,0 +1,29 @@
+
+<?php
+$userManager = new UserManager();
+$user = $userManager->findOne($_GET['id']);
+?>
+
+<form action="/index.php?controller=user&action=update&id=<?= $user->getId() ?>" method="POST">
+    <input type="hidden" name="id" value="<?= $user->getId() ?>">
+
+    <label for="first_name">Prénom</label>
+    <input type="text" name="first_name" value="<?= $user->getFirstName() ?>" required>
+
+    <label for="last_name">Nom</label>
+    <input type="text" name="last_name" value="<?= $user->getLastName() ?>" required>
+
+    <label for="email">Email</label>
+    <input type="email" name="email" value="<?= $user->getEmail() ?>" required>
+
+    <label for="password">Mot de passe</label>
+    <input type="password" name="password" placeholder="Nouveau mot de passe (laisser vide si inchangé)">
+
+    <label for="role">Rôle</label>
+    <select name="role" required>
+        <option value="admin" <?= $user->getRole() === 'admin' ? 'selected' : '' ?>>Admin</option>
+        <option value="user" <?= $user->getRole() === 'user' ? 'selected' : '' ?>>User</option>
+    </select>
+
+    <button type="submit">Mettre à jour</button>
+</form>

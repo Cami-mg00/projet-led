@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des événements</title>
+</head>
+<body>
+<h1>Liste des événements</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Date</th>
+        <th>Lieu</th>
+        <th>Catégorie</th>
+        <th>Actions</th>
+    </tr>
+    <?php foreach ($events as $event) : ?>
+        <tr>
+            <td><?= htmlspecialchars($event['id']) ?></td>
+            <td><?= htmlspecialchars($event['name']) ?></td>
+            <td><?= htmlspecialchars($event['date']) ?></td>
+            <td><?= htmlspecialchars($event['location']) ?></td>
+            <td><?= htmlspecialchars($event['category']) ?></td>
+            <td>
+                <a href="/index.php?controller=event&action=update&id=<?= $event['id'] ?>">Modifier</a> |
+                <a href="/index.php?controller=event&action=delete&id=<?= $event['id'] ?>" onclick="return confirm('Es-tu sûr de vouloir supprimer cet événement ?');">Supprimer</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+
+<a href="/index.php?controller=event&action=create">Ajouter un événement</a>
+</body>
+</html>

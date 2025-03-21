@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des articles</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Liste des articles</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Titre</th>
+        <th>Date</th>
+        <th>Catégories</th>
+        <th>Actions</th>
+    </tr>
+
+    <?php
+
+    $articleManager = new ArticleManager();
+    $articles = $articleManager->findAll();
+
+    foreach ($articles as $article) : ?>
+        <tr>
+            <td><?= htmlspecialchars($article['id']) ?></td>
+            <td><?= htmlspecialchars($article['title']) ?></td>
+            <td><?= htmlspecialchars($article['date']) ?></td>
+            <td><?= htmlspecialchars($article['article_categories']) ?></td>
+            <td>
+                <a href="/index.php?controller=article&action=update&id=<?= $article['id'] ?>">Modifier</a> |
+                <a href="/index.php?controller=article&action=delete&id=<?= $article['id'] ?>" onclick="return confirm('Es-tu sûr de vouloir supprimer cet article ?');">Supprimer</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+
+<a href="/index.php?controller=article&action=create">Ajouter un article</a>
+
+</body>
+</html>

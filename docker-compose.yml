@@ -1,0 +1,29 @@
+services:
+  web:
+    image: php:8-apache
+    container_name: php_web
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+  db:
+    image: mysql:8
+    container_name: php_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: camillemounier_led
+      MYSQL_USER: camillemounier
+      MYSQL_PASSWORD: root  # Ajoute un mot de passe ici
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql  # Ajoute un volume pour éviter la corruption des fichiers
+
+volumes:
+  db_data:

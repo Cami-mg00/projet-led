@@ -1,0 +1,34 @@
+
+<?php
+$articleManager = new ArticleManager();
+$article = $articleManager->findOne($_GET['id']);
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier l'article</title>
+</head>
+<body>
+<h1>Modifier l'article : <?= htmlspecialchars($article->getTitle()) ?></h1>
+
+<form method="POST" action="/index.php?controller=article&action=update&id=<?= $article->getId() ?>">
+    <label for="title">Titre de l'article :</label>
+    <input type="text" name="title" id="title" value="<?= htmlspecialchars($article->getTitle()) ?>" required><br>
+
+    <label for="content">Contenu :</label>
+    <textarea name="content" id="content" required><?= htmlspecialchars($article->getContent()) ?></textarea><br>
+
+    <label for="date">Date de l'événement :</label>
+    <input type="date" name="date" id="date" value="<?= $article->getDate() ?>" required><br>
+
+    <label for="article_categories">Catégories :</label>
+    <input type="text" name="article_categories" id="article_categories" value="<?= htmlspecialchars($article->getArticleCategories()) ?>" required><br>
+
+    <button type="submit">Mettre à jour l'article</button>
+</form>
+
+<a href="/index.php?controller=article&action=list">Retour à la liste des articles</a>
+</body>
+</html>

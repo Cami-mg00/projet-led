@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title><?= htmlspecialchars($title ?? "Mon site") ?></title>
+</head>
+<body>
+<header>
+    <h1><?= htmlspecialchars($title ?? "Mon site") ?></h1>
+    <nav>
+        <!-- Liens pour les utilisateurs -->
+        <a href="/index.php?controller=user&action=list">Liste des utilisateurs</a> |
+        <a href="/index.php?controller=user&action=create">Créer un utilisateur</a> |
+
+        <!-- Liens pour les événements -->
+        <a href="/index.php?controller=event&action=list">Liste des événements</a> |
+        <a href="/index.php?controller=event&action=create">Créer un événement</a>
+    </nav>
+</header>
+
+<main>
+    <?php if (isset($template) && file_exists($template)): ?>
+        <?php require $template; ?>
+    <?php else: ?>
+        <p>Erreur : le fichier de template est introuvable.</p>
+    <?php endif; ?>
+</main>
+
+<footer>
+    <p>© 2025 - Projet LED</p>
+</footer>
+</body>
+</html>

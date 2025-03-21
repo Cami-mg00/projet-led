@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier un événement</title>
+</head>
+<body>
+<header>
+    <h1>Modifier un événement</h1>
+</header>
+
+<main>
+    <form action="/index.php?controller=event&action=update&id=<?= $event->getId() ?>" method="POST">
+        <input type="hidden" name="id" value="<?= $event->getId() ?>">
+
+        <label for="name">Nom de l'événement :</label>
+        <input type="text" name="name" id="name" value="<?= htmlspecialchars($event->getName()) ?>" required>
+
+        <label for="date">Date de l'événement :</label>
+        <input type="date" name="date" id="date" value="<?= htmlspecialchars($event->getDate()) ?>" required>
+
+        <label for="location">Lieu de l'événement :</label>
+        <input type="text" name="location" id="location" value="<?= htmlspecialchars($event->getLocation()) ?>" required>
+
+        <label for="category">Catégorie de l'événement :</label>
+        <select name="category" id="category" required>
+            <option value="M9" <?= $event->getCategory() === 'M9' ? 'selected' : '' ?>>M9</option>
+            <option value="M11" <?= $event->getCategory() === 'M11' ? 'selected' : '' ?>>M11</option>
+            <option value="M13" <?= $event->getCategory() === 'M13' ? 'selected' : '' ?>>M13</option>
+            <option value="M15" <?= $event->getCategory() === 'M15' ? 'selected' : '' ?>>M15</option>
+            <option value="M17" <?= $event->getCategory() === 'M17' ? 'selected' : '' ?>>M17</option>
+            <option value="Senior" <?= $event->getCategory() === 'Senior' ? 'selected' : '' ?>>Senior</option>
+        </select>
+
+        <label for="created_by">ID de l'utilisateur créateur :</label>
+        <input type="number" name="created_by" id="created_by" value="<?= $event->getCreatedBy() ?>" required>
+
+        <button type="submit">Mettre à jour l'événement</button>
+    </form>
+</main>
+
+<footer>
+    <p>© 2025 - Projet LED</p>
+</footer>
+</body>
+</html>
